@@ -7,6 +7,7 @@ public class Kunde {
     private int einkaeufe;
     private int umsatz;
     private int guthaben;
+    private String name;
 
     /**
      * constructor that gives all the default parameters
@@ -16,6 +17,7 @@ public class Kunde {
         setEinkaeufe(5);
         setUmsatz(100);
         setGuthaben(15);
+        setName("Hubert Müller");
     }
 
     /**
@@ -26,6 +28,7 @@ public class Kunde {
         setEinkaeufe(5);
         setUmsatz(100);
         setGuthaben(15);
+        setName("Hubert Müller");
     }
 
     /**
@@ -75,6 +78,43 @@ public class Kunde {
             System.out.println("guthaben needs to be positive");
         }
     }
+    
+    public void setName(String nameNeu) {
+        int posLeerzeichen;
+        char zeichen;
+        String surName;
+        String firstName;
+        
+        if(nameNeu != null && nameNeu.length() >= 2) {
+            if(nameNeu.charAt(0) >= 'A' && nameNeu.charAt(0) <= 'Z') {
+                posLeerzeichen= nameNeu.indexOf(' ');
+                if(posLeerzeichen >= 2) {
+                    zeichen = nameNeu.charAt(posLeerzeichen + 1);
+                    if(zeichen >= 'A' && zeichen <= 'Z') {
+                        surName = nameNeu.substring(0, posLeerzeichen);
+                        firstName = nameNeu.substring(posLeerzeichen + 1);
+                        System.out.println(firstName + " " + surName);
+                        if(surName.equals(firstName)) {
+                            System.out.println("setName: surName and firstName are equal");
+                        }
+                        name = nameNeu;
+                    }
+                    else {
+                        System.out.println("setName: character after space needs to be capitalized");
+                    }
+                }
+                else {
+                System.out.println("setName: needs space after at least two characters");
+                }
+            }
+            else {
+            System.out.println("setName: first character needs to be capitelized");
+            }
+        }
+        else {
+            System.out.println("setName: null or too short");
+        }
+    }
 
     /**
      * gets the Kundennummer
@@ -103,6 +143,10 @@ public class Kunde {
     public int getGuthaben() {
         return guthaben;
     }
+    
+    public String getName() {
+        return name;
+    }
 
     /**
      * prints every info about Kunde into the terminal
@@ -112,6 +156,7 @@ public class Kunde {
         System.out.println(einkaeufe);
         System.out.println(umsatz);
         System.out.println(guthaben);
+        System.out.println(name);
     }
 
     /**
@@ -140,5 +185,22 @@ public class Kunde {
         else {
             System.out.println("einkauf needs to be positive");
         }
+    }
+    
+    public String toString() {
+        String s;
+        
+        s = "KNr: " + nummer + ", " + name;           //Variant 1
+        if(einkaeufe > 0) {
+            s = s + ", " + einkaeufe + " Einkäufe";         //Variant 2
+        }
+        if(guthaben > 0) {
+            s = s + ", Guthaben " + guthaben + " Euro";     //Variant 3
+            }
+        if(einkaeufe > 0) {
+            s = s + ", Umsatz: " + umsatz + " Euro";        //Variant 4
+            }
+        
+        return s;
     }
 }
